@@ -3,12 +3,41 @@ import 'package:provider/provider.dart';
 import 'package:static_job_listings_master/providers/rootSizeProvider.dart';
 import 'package:static_job_listings_master/styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:static_job_listings_master/utils/readJSONFile.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  List<dynamic> _jobs = [];
+
+  void _filterJobs() {
+    setState(() {
+      // Logic to filter jobs
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    readJSONFile().then(
+      (data) => {
+        setState(
+          () {
+            _jobs = data;
+          },
+        ),
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
+    debugPrint("${_jobs}");
     final double rootSize = Provider.of<RootSizeProvider>(context).rootSize;
     final double deviceWidth = MediaQuery.of(context).size.width;
     debugPrint("${deviceWidth}");
