@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 class JobCard extends StatelessWidget {
-  const JobCard({Key? key}) : super(key: key);
+  final Map jobInfo;
+  const JobCard({Key? key, required this.jobInfo}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Text(jobInfo["company"]),
+    );
   }
 }

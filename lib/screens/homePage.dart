@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:static_job_listings_master/components/jobCard.dart';
 import 'package:static_job_listings_master/providers/rootSizeProvider.dart';
 import 'package:static_job_listings_master/styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -37,7 +38,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("${_jobs}");
+    debugPrint("${_jobs.length}");
     final double rootSize = Provider.of<RootSizeProvider>(context).rootSize;
     final double deviceWidth = MediaQuery.of(context).size.width;
     debugPrint("${deviceWidth}");
@@ -60,8 +61,15 @@ class _HomePageState extends State<HomePage> {
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(
-                        rootSize * 2, rootSize * 2, rootSize * 2, 0),
-                    child: Text("SUP"),
+                        rootSize * 1.5, rootSize * 2, rootSize * 1.5, 0),
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: _jobs.length,
+                      itemBuilder: (context, index) {
+                        return JobCard(jobInfo: _jobs[index]);
+                      },
+                    ),
                   ),
                 ],
               ),
