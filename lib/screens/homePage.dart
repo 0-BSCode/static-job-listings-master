@@ -38,7 +38,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("${_jobs.length}");
     final double rootSize = Provider.of<RootSizeProvider>(context).rootSize;
     final double deviceWidth = MediaQuery.of(context).size.width;
     debugPrint("${deviceWidth}");
@@ -59,16 +58,22 @@ class _HomePageState extends State<HomePage> {
                       semanticsLabel: "Background header mobile",
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.fromLTRB(
-                        rootSize * 1.5, rootSize * 2, rootSize * 1.5, 0),
-                    child: ListView.builder(
-                      shrinkWrap: true,
+                  Expanded(
+                    child: SingleChildScrollView(
                       scrollDirection: Axis.vertical,
-                      itemCount: _jobs.length,
-                      itemBuilder: (context, index) {
-                        return JobCard(jobInfo: _jobs[index]);
-                      },
+                      physics: BouncingScrollPhysics(),
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(
+                            rootSize * 1.5, rootSize * 2, rootSize * 1.5, 0),
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          itemCount: _jobs.length,
+                          itemBuilder: (context, index) {
+                            return JobCard(jobInfo: _jobs[index]);
+                          },
+                        ),
+                      ),
                     ),
                   ),
                 ],
