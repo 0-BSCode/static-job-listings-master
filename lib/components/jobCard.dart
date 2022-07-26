@@ -2,8 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/provider.dart';
+import 'package:static_job_listings_master/components/jobDescription.dart';
+import 'package:static_job_listings_master/components/jobDetail.dart';
+import 'package:static_job_listings_master/components/jobTag.dart';
 import 'package:static_job_listings_master/providers/rootSizeProvider.dart';
 import 'package:static_job_listings_master/styles.dart';
+import 'package:static_job_listings_master/utils/addSpacing.dart';
+import 'package:static_job_listings_master/utils/generateList.dart';
 import 'package:static_job_listings_master/utils/parseImagePath.dart';
 
 class JobCard extends StatelessWidget {
@@ -16,7 +21,7 @@ class JobCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.fromLTRB(0, rootSize * 3, 0, 0),
       child: Container(
-        height: rootSize * 12,
+        height: rootSize * 15,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(rootSize * 5 / 15),
@@ -50,8 +55,8 @@ class JobCard extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: rootSize * 1.5, vertical: rootSize * 3),
+                      padding: EdgeInsets.fromLTRB(rootSize * 1.5, rootSize * 3,
+                          rootSize * 1.5, rootSize),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -59,71 +64,75 @@ class JobCard extends StatelessWidget {
                             children: [
                               Text(
                                 jobInfo['company'],
-                              ),
-                              if (jobInfo['new'])
-                                Container(
-                                  child: Text(
-                                    "NEW!",
-                                  ),
+                                style: TextStyle(
+                                  color: COLOR_DARK_CYAN.toColor(),
+                                  fontSize: rootSize * 14 / 15,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: rootSize * 5 / 150,
                                 ),
+                              ),
+                              addHorizontalSpacing(rootSize),
+                              if (jobInfo['new'])
+                                JobTag(
+                                  name: 'NEW!',
+                                  bgColor: COLOR_DARK_CYAN.toColor(),
+                                ),
+                              addHorizontalSpacing(rootSize * 10 / 15),
                               if (jobInfo['featured'])
-                                Container(
-                                  child: Text(
-                                    'FEATURED',
-                                  ),
+                                JobTag(
+                                  name: 'FEATURED',
+                                  bgColor: COLOR_VERY_DARK_GRAY_CYAN.toColor(),
                                 ),
                             ],
                           ),
+                          addVerticalSpacing(rootSize * 10 / 15),
                           Text(
                             jobInfo['position'],
+                            style: TextStyle(
+                              fontWeight: FontWeight.w700,
+                              fontSize: rootSize * 14 / 15,
+                            ),
                           ),
+                          addVerticalSpacing(rootSize * 13 / 15),
                           Row(
                             children: [
-                              Text(jobInfo['postedAt']),
-                              Text(
-                                ' • ',
+                              JobDetail(
+                                detail: jobInfo['postedAt'],
                               ),
-                              Text(
-                                jobInfo['contract'],
+                              JobDetail(
+                                detail: '  •  ',
                               ),
-                              Text(
-                                ' • ',
+                              JobDetail(
+                                detail: jobInfo['contract'],
                               ),
-                              Text(
-                                jobInfo['location'],
+                              JobDetail(
+                                detail: '  •  ',
+                              ),
+                              JobDetail(
+                                detail: jobInfo['location'],
                               ),
                             ],
                           ),
+                          addVerticalSpacing(rootSize * 13 / 15),
                           Container(
-                            height: rootSize * 3 / 15,
-                            width: constraints.maxWidth - (rootSize * 4),
+                            height: rootSize * 2 / 15,
+                            width: constraints.maxWidth - (rootSize * 3.5),
                             color: COLOR_LIGHT_GRAY_CYAN_TABLETS.toColor(),
                           ),
-                          Expanded(
-                            child: Row(
-                              children: [
-                                ListView.builder(
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: jobInfo["languages"].length,
-                                  itemBuilder: (context, index) {
-                                    return Container(
-                                      child: Text(jobInfo["languages"][index]),
-                                    );
-                                  },
-                                ),
-                                ListView.builder(
-                                  shrinkWrap: true,
-                                  scrollDirection: Axis.horizontal,
-                                  itemCount: jobInfo["tools"].length,
-                                  itemBuilder: (context, index) {
-                                    return Container(
-                                      child: Text(jobInfo["tools"][index]),
-                                    );
-                                  },
-                                ),
-                              ],
-                            ),
+                          addVerticalSpacing(rootSize * 13 / 15),
+                          Wrap(
+                            spacing: rootSize,
+                            runSpacing: rootSize,
+                            children: [
+                              JobDescription(
+                                description: jobInfo["role"],
+                              ),
+                              JobDescription(
+                                description: jobInfo["level"],
+                              ),
+                              ...generateList(jobInfo["languages"]),
+                              ...generateList(jobInfo["tools"]),
+                            ],
                           ),
                         ],
                       ),
