@@ -21,13 +21,14 @@ class JobCard extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.fromLTRB(0, rootSize * 3, 0, 0),
       child: Container(
-        height: rootSize * 15,
+        height: rootSize * 17.5,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(rootSize * 5 / 15),
         ),
         child: LayoutBuilder(
           builder: (context, constraints) {
+            debugPrint("Container constraints: ${constraints}");
             return Stack(
               clipBehavior: Clip.none,
               children: [
@@ -41,11 +42,13 @@ class JobCard extends StatelessWidget {
                     width: rootSize * 3.5,
                   ),
                 ),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Wrap(
+                  direction: Axis.horizontal,
+                  crossAxisAlignment: WrapCrossAlignment.start,
                   children: [
                     Container(
                       width: rootSize * 5 / 15,
+                      height: constraints.maxHeight,
                       decoration: BoxDecoration(
                         color: COLOR_DARK_CYAN.toColor(),
                         borderRadius: BorderRadius.only(
@@ -55,8 +58,11 @@ class JobCard extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      padding: EdgeInsets.fromLTRB(rootSize * 1.5, rootSize * 3,
-                          rootSize * 1.5, rootSize),
+                      // padding: EdgeInsets.fromLTRB(rootSize * 1.5, rootSize * 3,
+                      //     rootSize * 1.5, rootSize),
+                      padding: EdgeInsets.fromLTRB(
+                          rootSize * 1.5, rootSize * 3, 0, 0),
+                      width: rootSize * 20,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -121,8 +127,8 @@ class JobCard extends StatelessWidget {
                           ),
                           addVerticalSpacing(rootSize * 13 / 15),
                           Wrap(
-                            spacing: rootSize,
-                            runSpacing: rootSize,
+                            spacing: rootSize * 1.4,
+                            runSpacing: rootSize * 1.2,
                             children: [
                               JobDescription(
                                 description: jobInfo["role"],

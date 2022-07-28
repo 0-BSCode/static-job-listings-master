@@ -11,17 +11,31 @@ class JobDescription extends StatelessWidget {
   Widget build(BuildContext context) {
     final double rootSize = Provider.of<RootSizeProvider>(context).rootSize;
     return Container(
-      padding: EdgeInsets.all(rootSize * 7 / 15),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(rootSize * 3 / 15),
         color: COLOR_LIGHT_GRAY_CYAN_BACKGROUND.toColor(),
       ),
-      child: Text(
-        description,
-        style: TextStyle(
-          color: COLOR_DARK_CYAN.toColor(),
-          fontWeight: FontWeight.w700,
-          fontSize: rootSize * 13 / 15,
+      child: TextButton(
+        onPressed: () {},
+        style: ButtonStyle(
+          padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+            EdgeInsets.all(rootSize * 10 / 15),
+          ),
+          overlayColor: MaterialStateColor.resolveWith((states) {
+            if (states.contains(MaterialState.hovered)) {
+              return COLOR_LIGHT_GRAY_CYAN_TABLETS.toColor();
+            } else {
+              return Colors.white;
+            }
+          }),
+        ),
+        child: Text(
+          description,
+          style: TextStyle(
+            color: COLOR_DARK_CYAN.toColor(),
+            fontWeight: FontWeight.w700,
+            fontSize: rootSize * 13.5 / 15,
+          ),
         ),
       ),
     );
