@@ -8,7 +8,7 @@ import 'package:static_job_listings_master/components/jobTag.dart';
 import 'package:static_job_listings_master/providers/rootSizeProvider.dart';
 import 'package:static_job_listings_master/styles.dart';
 import 'package:static_job_listings_master/utils/addSpacing.dart';
-import 'package:static_job_listings_master/utils/generateList.dart';
+import 'package:static_job_listings_master/utils/generateDescriptions.dart';
 import 'package:static_job_listings_master/utils/parseImagePath.dart';
 
 class JobCard extends StatelessWidget {
@@ -28,7 +28,6 @@ class JobCard extends StatelessWidget {
         ),
         child: LayoutBuilder(
           builder: (context, constraints) {
-            debugPrint("Container constraints: ${constraints}");
             return Stack(
               clipBehavior: Clip.none,
               children: [
@@ -136,8 +135,8 @@ class JobCard extends StatelessWidget {
                               JobDescription(
                                 description: jobInfo["level"],
                               ),
-                              ...generateList(jobInfo["languages"]),
-                              ...generateList(jobInfo["tools"]),
+                              ...generateDescriptions(jobInfo["languages"]),
+                              ...generateDescriptions(jobInfo["tools"]),
                             ],
                           ),
                         ],

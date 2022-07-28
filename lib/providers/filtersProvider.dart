@@ -7,12 +7,17 @@ class FiltersProvider with ChangeNotifier, DiagnosticableTreeMixin {
   List<String> get filters => _filters;
 
   void addFilter(String filter) {
-    _filters.add(filter);
+    if (!_filters.contains(filter)) _filters.add(filter);
     notifyListeners();
   }
 
   void deleteFilter(String filter) {
-    _filters.where((element) => element != filter).toList();
+    _filters = _filters.where((element) => element != filter).toList();
+    notifyListeners();
+  }
+
+  void clearFilters() {
+    _filters = [];
     notifyListeners();
   }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:static_job_listings_master/providers/filtersProvider.dart';
 import 'package:static_job_listings_master/providers/rootSizeProvider.dart';
 import 'package:static_job_listings_master/styles.dart';
 
@@ -16,18 +17,23 @@ class JobDescription extends StatelessWidget {
         color: COLOR_LIGHT_GRAY_CYAN_BACKGROUND.toColor(),
       ),
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          Provider.of<FiltersProvider>(context, listen: false)
+              .addFilter(description);
+        },
         style: ButtonStyle(
           padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
             EdgeInsets.all(rootSize * 10 / 15),
           ),
-          overlayColor: MaterialStateColor.resolveWith((states) {
-            if (states.contains(MaterialState.hovered)) {
-              return COLOR_LIGHT_GRAY_CYAN_TABLETS.toColor();
-            } else {
-              return Colors.white;
-            }
-          }),
+          overlayColor: MaterialStateColor.resolveWith(
+            (states) {
+              if (states.contains(MaterialState.hovered)) {
+                return COLOR_LIGHT_GRAY_CYAN_TABLETS.toColor();
+              } else {
+                return Colors.white;
+              }
+            },
+          ),
         ),
         child: Text(
           description,
