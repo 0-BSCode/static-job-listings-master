@@ -17,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List<dynamic> _jobs = [];
+  List<dynamic> _filteredJobs = [];
 
   void _filterJobs() {
     setState(() {
@@ -32,6 +33,7 @@ class _HomePageState extends State<HomePage> {
         setState(
           () {
             _jobs = data;
+            _filteredJobs = data;
           },
         ),
       },
@@ -74,9 +76,9 @@ class _HomePageState extends State<HomePage> {
                             child: ListView.builder(
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
-                              itemCount: _jobs.length,
+                              itemCount: _filteredJobs.length,
                               itemBuilder: (context, index) {
-                                return JobCard(jobInfo: _jobs[index]);
+                                return JobCard(jobInfo: _filteredJobs[index]);
                               },
                             ),
                           ),

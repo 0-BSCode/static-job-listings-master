@@ -13,6 +13,7 @@ class Filter extends StatelessWidget {
     final double rootSize = Provider.of<RootSizeProvider>(context).rootSize;
     return Container(
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Container(
             decoration: BoxDecoration(
@@ -43,7 +44,7 @@ class Filter extends StatelessWidget {
             child: TextButton(
               style: ButtonStyle(
                 padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                  EdgeInsets.all(0),
+                  EdgeInsets.all(rootSize * 17 / 15),
                 ),
                 backgroundColor: MaterialStateColor.resolveWith(
                   (states) => COLOR_DARK_CYAN.toColor(),
@@ -58,6 +59,7 @@ class Filter extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w700,
+                  fontSize: rootSize * 13.5 / 15,
                 ),
               ),
             ),
