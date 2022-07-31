@@ -25,6 +25,14 @@ class JobCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(rootSize * 5 / 15),
+          boxShadow: [
+            BoxShadow(
+              offset: Offset(0, rootSize * 7 / 15),
+              blurRadius: rootSize * 10 / 15,
+              spreadRadius: rootSize * 2 / 15,
+              color: COLOR_DARK_CYAN.toColor().withOpacity(0.2),
+            ),
+          ],
         ),
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -57,8 +65,6 @@ class JobCard extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      // padding: EdgeInsets.fromLTRB(rootSize * 1.5, rootSize * 3,
-                      //     rootSize * 1.5, rootSize),
                       padding: EdgeInsets.fromLTRB(
                           rootSize * 1.5, rootSize * 3, 0, 0),
                       width: rootSize * 20,
