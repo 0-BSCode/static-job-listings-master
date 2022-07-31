@@ -7,6 +7,7 @@ import 'package:static_job_listings_master/providers/rootSizeProvider.dart';
 import 'package:static_job_listings_master/styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:static_job_listings_master/utils/addSpacing.dart';
+import 'package:static_job_listings_master/utils/determineRootSize.dart';
 import 'package:static_job_listings_master/utils/generateFilters.dart';
 import 'package:static_job_listings_master/utils/readJSONFile.dart';
 
@@ -15,6 +16,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    determineRootSize(context);
     final double rootSize = Provider.of<RootSizeProvider>(context).rootSize;
     final double deviceWidth = MediaQuery.of(context).size.width;
     final List<String> filters = Provider.of<FiltersProvider>(context).filters;
@@ -81,11 +83,20 @@ class HomePage extends StatelessWidget {
                                     }
                                   },
                                 ),
+                                foregroundColor: MaterialStateColor.resolveWith(
+                                  (states) {
+                                    if (states
+                                        .contains(MaterialState.hovered)) {
+                                      return COLOR_DARK_CYAN.toColor();
+                                    } else {
+                                      return COLOR_DARK_GRAY_CYAN.toColor();
+                                    }
+                                  },
+                                ),
                               ),
                               child: Text(
                                 'Clear',
                                 style: TextStyle(
-                                  color: COLOR_DARK_GRAY_CYAN.toColor(),
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),

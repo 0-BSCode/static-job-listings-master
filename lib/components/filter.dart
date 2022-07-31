@@ -47,7 +47,13 @@ class Filter extends StatelessWidget {
               child: TextButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateColor.resolveWith(
-                    (states) => COLOR_DARK_CYAN.toColor(),
+                    (states) {
+                      if (states.contains(MaterialState.hovered)) {
+                        return COLOR_VERY_DARK_GRAY_CYAN.toColor();
+                      } else {
+                        return COLOR_DARK_CYAN.toColor();
+                      }
+                    },
                   ),
                 ),
                 onPressed: () {

@@ -67,7 +67,7 @@ class JobCard extends StatelessWidget {
                     Container(
                       padding: EdgeInsets.fromLTRB(
                           rootSize * 1.5, rootSize * 3, 0, 0),
-                      width: rootSize * 20,
+                      width: constraints.maxWidth - rootSize,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -97,11 +97,29 @@ class JobCard extends StatelessWidget {
                             ],
                           ),
                           addVerticalSpacing(rootSize * 10 / 15),
-                          Text(
-                            jobInfo['position'],
-                            style: TextStyle(
-                              fontWeight: FontWeight.w700,
-                              fontSize: rootSize * 14 / 15,
+                          TextButton(
+                            onPressed: () {},
+                            style: ButtonStyle(
+                              overlayColor: MaterialStateColor.resolveWith(
+                                (states) =>
+                                    COLOR_LIGHT_GRAY_CYAN_BACKGROUND.toColor(),
+                              ),
+                              foregroundColor: MaterialStateColor.resolveWith(
+                                (states) {
+                                  if (states.contains(MaterialState.hovered)) {
+                                    return COLOR_DARK_CYAN.toColor();
+                                  } else {
+                                    return COLOR_VERY_DARK_GRAY_CYAN.toColor();
+                                  }
+                                },
+                              ),
+                            ),
+                            child: Text(
+                              jobInfo['position'],
+                              style: TextStyle(
+                                fontWeight: FontWeight.w700,
+                                fontSize: rootSize * 14 / 15,
+                              ),
                             ),
                           ),
                           addVerticalSpacing(rootSize * 13 / 15),
@@ -132,8 +150,8 @@ class JobCard extends StatelessWidget {
                           ),
                           addVerticalSpacing(rootSize * 13 / 15),
                           Wrap(
-                            spacing: rootSize * 1.4,
-                            runSpacing: rootSize * 1.2,
+                            spacing: rootSize,
+                            runSpacing: rootSize,
                             children: [
                               JobDescription(
                                 description: jobInfo["role"],

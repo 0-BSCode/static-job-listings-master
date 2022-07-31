@@ -27,10 +27,20 @@ class JobDescription extends StatelessWidget {
           ),
           overlayColor: MaterialStateColor.resolveWith(
             (states) {
-              if (states.contains(MaterialState.hovered)) {
-                return COLOR_LIGHT_GRAY_CYAN_TABLETS.toColor();
+              if (states.contains(MaterialState.hovered) ||
+                  states.contains(MaterialState.pressed)) {
+                return COLOR_DARK_CYAN.toColor();
               } else {
                 return Colors.white;
+              }
+            },
+          ),
+          foregroundColor: MaterialStateColor.resolveWith(
+            (states) {
+              if (states.contains(MaterialState.hovered)) {
+                return Colors.white;
+              } else {
+                return COLOR_DARK_CYAN.toColor();
               }
             },
           ),
@@ -38,7 +48,6 @@ class JobDescription extends StatelessWidget {
         child: Text(
           description,
           style: TextStyle(
-            color: COLOR_DARK_CYAN.toColor(),
             fontWeight: FontWeight.w700,
             fontSize: rootSize * 13.5 / 15,
           ),
