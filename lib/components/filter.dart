@@ -44,6 +44,7 @@ class Filter extends StatelessWidget {
             padding: EdgeInsets.all(rootSize * 0 / 15),
             child: SizedBox(
               width: rootSize * 2,
+              height: rootSize * 2,
               child: TextButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateColor.resolveWith(

@@ -38,6 +38,8 @@ class HomePage extends StatelessWidget {
                     child: SvgPicture.asset(
                       "assets/images/bg-header-mobile.svg",
                       semanticsLabel: "Background header mobile",
+                      width: constraints.maxWidth,
+                      fit: BoxFit.fitWidth,
                     ),
                   ),
                   Column(
@@ -49,7 +51,7 @@ class HomePage extends StatelessWidget {
                               BorderRadius.circular(rootSize * 5 / 15),
                         ),
                         margin: EdgeInsets.fromLTRB(
-                            rootSize * 1.5, rootSize * 8.5, rootSize * 1.5, 0),
+                            rootSize * 1.5, 130, rootSize * 1.5, 0),
                         padding: EdgeInsets.symmetric(
                             horizontal: rootSize, vertical: rootSize * 0.8),
                         child: Row(
@@ -72,16 +74,8 @@ class HomePage extends StatelessWidget {
                               },
                               style: ButtonStyle(
                                 overlayColor: MaterialStateColor.resolveWith(
-                                  (states) {
-                                    if (states
-                                        .contains(MaterialState.hovered)) {
-                                      return COLOR_LIGHT_GRAY_CYAN_TABLETS
-                                          .toColor();
-                                    } else {
-                                      return COLOR_LIGHT_GRAY_CYAN_BACKGROUND
-                                          .toColor();
-                                    }
-                                  },
+                                  (states) => COLOR_LIGHT_GRAY_CYAN_BACKGROUND
+                                      .toColor(),
                                 ),
                                 foregroundColor: MaterialStateColor.resolveWith(
                                   (states) {
@@ -98,6 +92,7 @@ class HomePage extends StatelessWidget {
                                 'Clear',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w700,
+                                  fontSize: rootSize * 13.5 / 15,
                                 ),
                               ),
                             ),
@@ -122,7 +117,7 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                       ),
-                      addVerticalSpacing(rootSize * 2),
+                      // addVerticalSpacing(rootSize * 2),
                     ],
                   ),
                 ],
