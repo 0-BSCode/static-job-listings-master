@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart';
+import 'package:static_job_listings_master/providers/activeJobProvider.dart';
 import 'package:static_job_listings_master/providers/filtersProvider.dart';
 import 'package:static_job_listings_master/providers/rootSizeProvider.dart';
 import 'package:static_job_listings_master/screens/homePage.dart';
@@ -15,6 +16,9 @@ void main() {
         ChangeNotifierProvider(
           create: (_) => FiltersProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (_) => ActiveJobProvider(),
+        )
       ],
       child: MyApp(),
     ),

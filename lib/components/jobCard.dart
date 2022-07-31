@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:static_job_listings_master/components/jobDescription.dart';
 import 'package:static_job_listings_master/components/jobDetail.dart';
 import 'package:static_job_listings_master/components/jobTag.dart';
+import 'package:static_job_listings_master/providers/activeJobProvider.dart';
 import 'package:static_job_listings_master/providers/rootSizeProvider.dart';
 import 'package:static_job_listings_master/styles.dart';
 import 'package:static_job_listings_master/utils/addSpacing.dart';
@@ -18,6 +19,7 @@ class JobCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double rootSize = Provider.of<RootSizeProvider>(context).rootSize;
+    final int activeJobId = Provider.of<ActiveJobProvider>(context).id;
     return Padding(
       padding: EdgeInsets.fromLTRB(0, rootSize * 3, 0, 0),
       child: Container(
@@ -53,17 +55,18 @@ class JobCard extends StatelessWidget {
                   direction: Axis.horizontal,
                   crossAxisAlignment: WrapCrossAlignment.start,
                   children: [
-                    Container(
-                      width: rootSize * 5 / 15,
-                      height: constraints.maxHeight,
-                      decoration: BoxDecoration(
-                        color: COLOR_DARK_CYAN.toColor(),
-                        borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(rootSize * 5 / 15),
-                          bottomLeft: Radius.circular(rootSize * 5 / 15),
+                    if (activeJobId == jobInfo["id"])
+                      Container(
+                        width: rootSize * 5 / 15,
+                        height: constraints.maxHeight,
+                        decoration: BoxDecoration(
+                          color: COLOR_DARK_CYAN.toColor(),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(rootSize * 5 / 15),
+                            bottomLeft: Radius.circular(rootSize * 5 / 15),
+                          ),
                         ),
                       ),
-                    ),
                     Container(
                       padding: EdgeInsets.fromLTRB(
                           rootSize * 1.5, rootSize * 3, 0, 0),
@@ -98,7 +101,11 @@ class JobCard extends StatelessWidget {
                           ),
                           addVerticalSpacing(rootSize * 10 / 15),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Provider.of<ActiveJobProvider>(context,
+                                      listen: false)
+                                  .setActiveJobId(jobInfo["id"]);
+                            },
                             style: ButtonStyle(
                               overlayColor: MaterialStateColor.resolveWith(
                                 (states) =>
