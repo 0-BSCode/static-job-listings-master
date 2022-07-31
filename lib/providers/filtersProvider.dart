@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:static_job_listings_master/utils/readJSONFile.dart';
 
 class FiltersProvider with ChangeNotifier, DiagnosticableTreeMixin {
   List<String> _filters = [];
@@ -10,10 +11,13 @@ class FiltersProvider with ChangeNotifier, DiagnosticableTreeMixin {
   List<dynamic> get jobs => _jobs;
   List<dynamic> get filteredJobs => _filteredJobs;
 
-  void initJobs(List<dynamic> jobs) {
-    _jobs = jobs;
-    _filteredJobs = jobs;
-    notifyListeners();
+  FiltersProvider() {
+    initJobs();
+  }
+
+  Future<void> initJobs() async {
+    readJSONFile().then(
+        (data) => {_jobs = data, _filteredJobs = data, notifyListeners()});
   }
 
   void filterJobs() {

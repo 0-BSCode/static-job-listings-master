@@ -17,47 +17,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  late FiltersProvider filter;
-  late Future<List<dynamic>> _getJobs;
-
-  Future<dynamic> initializeJobs(BuildContext context) {
-    return readJSONFile().then((data) => data);
-  }
-
-  @override
-  void didChangeDependencies() {
-    // TODO: implement didChangeDependencies
-    super.didChangeDependencies();
-    filter = Provider.of<FiltersProvider>(context);
-  }
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   readJSONFile().then(
-  //     (data) => {
-  //       Provider.of<FiltersProvider>(context).initJobs(data),
-  //       setState(
-  //         () {
-  //           _jobs = data;
-  //           _filteredJobs = data;
-  //         },
-  //       ),
-  //     },
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
-    // initializeJobs(context);
     final double rootSize = Provider.of<RootSizeProvider>(context).rootSize;
     final double deviceWidth = MediaQuery.of(context).size.width;
     final List<String> filters = Provider.of<FiltersProvider>(context).filters;
     final List<dynamic> filteredJobs =
         Provider.of<FiltersProvider>(context).filteredJobs;
     debugPrint("${deviceWidth}");
-    // debugPrint("Filters: ${filters}");
-    // debugPrint("Filtered Jobs: ${filteredJobs.length}");
     return SafeArea(child: Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
