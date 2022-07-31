@@ -23,7 +23,7 @@ class Filter extends StatelessWidget {
               ),
               color: COLOR_LIGHT_GRAY_CYAN_BACKGROUND.toColor(),
             ),
-            padding: EdgeInsets.all(rootSize * 10 / 15),
+            padding: EdgeInsets.all(rootSize * 7 / 15),
             child: Text(
               filter,
               style: TextStyle(
@@ -41,25 +41,26 @@ class Filter extends StatelessWidget {
                 bottomRight: Radius.circular(rootSize * 3 / 15),
               ),
             ),
-            child: TextButton(
-              style: ButtonStyle(
-                padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-                  EdgeInsets.all(rootSize * 17 / 15),
+            padding: EdgeInsets.all(rootSize * 0 / 15),
+            child: SizedBox(
+              width: rootSize * 2,
+              child: TextButton(
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateColor.resolveWith(
+                    (states) => COLOR_DARK_CYAN.toColor(),
+                  ),
                 ),
-                backgroundColor: MaterialStateColor.resolveWith(
-                  (states) => COLOR_DARK_CYAN.toColor(),
-                ),
-              ),
-              onPressed: () {
-                Provider.of<FiltersProvider>(context, listen: false)
-                    .deleteFilter(filter);
-              },
-              child: Text(
-                'X',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
-                  fontSize: rootSize * 13.5 / 15,
+                onPressed: () {
+                  Provider.of<FiltersProvider>(context, listen: false)
+                      .deleteFilter(filter);
+                },
+                child: Text(
+                  'X',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700,
+                    fontSize: rootSize * 13.5 / 15,
+                  ),
                 ),
               ),
             ),

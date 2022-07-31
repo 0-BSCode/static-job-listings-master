@@ -68,6 +68,20 @@ class HomePage extends StatelessWidget {
                                         listen: false)
                                     .clearFilters();
                               },
+                              style: ButtonStyle(
+                                overlayColor: MaterialStateColor.resolveWith(
+                                  (states) {
+                                    if (states
+                                        .contains(MaterialState.hovered)) {
+                                      return COLOR_LIGHT_GRAY_CYAN_TABLETS
+                                          .toColor();
+                                    } else {
+                                      return COLOR_LIGHT_GRAY_CYAN_BACKGROUND
+                                          .toColor();
+                                    }
+                                  },
+                                ),
+                              ),
                               child: Text(
                                 'Clear',
                                 style: TextStyle(
