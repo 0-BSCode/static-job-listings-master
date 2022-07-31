@@ -6,6 +6,7 @@ import 'package:static_job_listings_master/providers/filtersProvider.dart';
 import 'package:static_job_listings_master/providers/rootSizeProvider.dart';
 import 'package:static_job_listings_master/styles.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:static_job_listings_master/utils/addSpacing.dart';
 import 'package:static_job_listings_master/utils/generateFilters.dart';
 import 'package:static_job_listings_master/utils/readJSONFile.dart';
 
@@ -30,13 +31,52 @@ class HomePage extends StatelessWidget {
               color: COLOR_LIGHT_GRAY_CYAN_BACKGROUND.toColor(),
               child: Stack(
                 children: [
+                  Container(
+                    color: COLOR_DARK_CYAN.toColor(),
+                    child: SvgPicture.asset(
+                      "assets/images/bg-header-mobile.svg",
+                      semanticsLabel: "Background header mobile",
+                    ),
+                  ),
                   Column(
                     children: [
                       Container(
-                        color: COLOR_DARK_CYAN.toColor(),
-                        child: SvgPicture.asset(
-                          "assets/images/bg-header-mobile.svg",
-                          semanticsLabel: "Background header mobile",
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius:
+                              BorderRadius.circular(rootSize * 5 / 15),
+                        ),
+                        margin: EdgeInsets.fromLTRB(
+                            rootSize * 1.5, rootSize * 8.5, rootSize * 1.5, 0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: rootSize, vertical: rootSize * 0.8),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: Wrap(
+                                direction: Axis.horizontal,
+                                spacing: rootSize,
+                                runSpacing: rootSize,
+                                children: [
+                                  ...generateFilters(filters),
+                                ],
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Provider.of<FiltersProvider>(context,
+                                        listen: false)
+                                    .clearFilters();
+                              },
+                              child: Text(
+                                'Clear',
+                                style: TextStyle(
+                                  color: COLOR_DARK_GRAY_CYAN.toColor(),
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       Expanded(
@@ -44,8 +84,8 @@ class HomePage extends StatelessWidget {
                           scrollDirection: Axis.vertical,
                           physics: BouncingScrollPhysics(),
                           child: Padding(
-                            padding: EdgeInsets.fromLTRB(rootSize * 1.5,
-                                rootSize * 2, rootSize * 1.5, 0),
+                            padding: EdgeInsets.fromLTRB(
+                                rootSize * 1.5, rootSize, rootSize * 1.5, 0),
                             child: ListView.builder(
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
@@ -57,44 +97,8 @@ class HomePage extends StatelessWidget {
                           ),
                         ),
                       ),
+                      addVerticalSpacing(rootSize * 2),
                     ],
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(rootSize * 5 / 15),
-                    ),
-                    margin: EdgeInsets.fromLTRB(
-                        rootSize * 1.5, rootSize * 8.5, rootSize * 1.5, 0),
-                    padding: EdgeInsets.symmetric(
-                        horizontal: rootSize, vertical: rootSize * 0.8),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: Wrap(
-                            direction: Axis.horizontal,
-                            spacing: rootSize,
-                            runSpacing: rootSize,
-                            children: [
-                              ...generateFilters(filters),
-                            ],
-                          ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            Provider.of<FiltersProvider>(context, listen: false)
-                                .clearFilters();
-                          },
-                          child: Text(
-                            'Clear',
-                            style: TextStyle(
-                              color: COLOR_DARK_GRAY_CYAN.toColor(),
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
                   ),
                 ],
               ),
