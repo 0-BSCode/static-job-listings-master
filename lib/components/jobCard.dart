@@ -26,10 +26,11 @@ class JobCard extends StatelessWidget {
     final double deviceWidth = MediaQuery.of(context).size.width;
     return Padding(
       padding: EdgeInsets.fromLTRB(
-          0,
-          deviceWidth < deviceWidths['md']! ? rootSize * 3 : rootSize * 2,
-          0,
-          0),
+        0,
+        0,
+        0,
+        deviceWidth < deviceWidths['md']! ? rootSize * 3 : rootSize * 2,
+      ),
       child: Container(
         height:
             deviceWidth < deviceWidths['md']! ? rootSize * 17.5 : rootSize * 11,

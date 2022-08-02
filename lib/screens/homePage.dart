@@ -117,8 +117,8 @@ class HomePage extends StatelessWidget {
                           scrollDirection: Axis.vertical,
                           physics: BouncingScrollPhysics(),
                           child: Padding(
-                            padding: EdgeInsets.fromLTRB(
-                                rootSize * 1.5, rootSize, rootSize * 1.5, 0),
+                            padding: EdgeInsets.fromLTRB(rootSize * 1.5,
+                                rootSize * 4, rootSize * 1.5, 0),
                             child: ListView.builder(
                               shrinkWrap: true,
                               scrollDirection: Axis.vertical,
