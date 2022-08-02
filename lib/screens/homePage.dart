@@ -105,9 +105,7 @@ class HomePage extends StatelessWidget {
                                 'Clear',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w700,
-                                  fontSize: deviceWidth < deviceWidths['md']!
-                                      ? rootSize * 13.5 / 15
-                                      : rootSize * 14.5 / 15,
+                                  fontSize: rootSize * 13.5 / 15,
                                 ),
                               ),
                             ),

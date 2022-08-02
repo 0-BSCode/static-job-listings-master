@@ -31,9 +31,7 @@ class Filter extends StatelessWidget {
               style: TextStyle(
                 color: COLOR_DARK_CYAN.toColor(),
                 fontWeight: FontWeight.w700,
-                fontSize: deviceWidth < deviceWidths['md']!
-                    ? rootSize * 13.5 / 15
-                    : rootSize * 14.5 / 15,
+                fontSize: rootSize * 13.5 / 15,
               ),
             ),
           ),
@@ -70,9 +68,7 @@ class Filter extends StatelessWidget {
                   style: TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
-                    fontSize: deviceWidth < deviceWidths['md']!
-                        ? rootSize * 13.5 / 15
-                        : rootSize * 14.5 / 15,
+                    fontSize: rootSize * 13.5 / 15,
                   ),
                 ),
               ),
