@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:static_job_listings_master/providers/filtersProvider.dart';
 import 'package:static_job_listings_master/providers/rootSizeProvider.dart';
 import 'package:static_job_listings_master/styles.dart';
+import 'package:static_job_listings_master/utils/determineRootSize.dart';
 
 class JobDescription extends StatelessWidget {
   final String description;
@@ -11,6 +12,7 @@ class JobDescription extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double rootSize = Provider.of<RootSizeProvider>(context).rootSize;
+    final double deviceWidth = MediaQuery.of(context).size.width;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(rootSize * 3 / 15),
@@ -49,7 +51,9 @@ class JobDescription extends StatelessWidget {
           description,
           style: TextStyle(
             fontWeight: FontWeight.w700,
-            fontSize: rootSize * 13.5 / 15,
+            fontSize: deviceWidth < deviceWidths['md']!
+                ? rootSize * 13.5 / 15
+                : rootSize * 14.5 / 15,
           ),
         ),
       ),

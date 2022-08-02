@@ -25,7 +25,11 @@ class JobCard extends StatelessWidget {
     final int activeJobId = Provider.of<ActiveJobProvider>(context).id;
     final double deviceWidth = MediaQuery.of(context).size.width;
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, rootSize * 3, 0, 0),
+      padding: EdgeInsets.fromLTRB(
+          0,
+          deviceWidth < deviceWidths['md']! ? rootSize * 3 : rootSize * 2,
+          0,
+          0),
       child: Container(
         height:
             deviceWidth < deviceWidths['md']! ? rootSize * 17.5 : rootSize * 11,
@@ -51,7 +55,7 @@ class JobCard extends StatelessWidget {
                       ? -rootSize * 1.5
                       : rootSize * 2.5,
                   left: deviceWidth < deviceWidths['md']!
-                      ? -rootSize * 1.5
+                      ? rootSize * 1.5
                       : rootSize * 3,
                   child: Image(
                     image: AssetImage(

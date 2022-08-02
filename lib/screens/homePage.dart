@@ -36,7 +36,9 @@ class HomePage extends StatelessWidget {
                   Container(
                     color: COLOR_DARK_CYAN.toColor(),
                     child: SvgPicture.asset(
-                      "assets/images/bg-header-mobile.svg",
+                      deviceWidth < deviceWidths['md']!
+                          ? "assets/images/bg-header-mobile.svg"
+                          : "assets/images/bg-header-desktop.svg",
                       semanticsLabel: "Background header mobile",
                       width: constraints.maxWidth,
                       fit: BoxFit.fitWidth,
@@ -49,9 +51,20 @@ class HomePage extends StatelessWidget {
                           color: Colors.white,
                           borderRadius:
                               BorderRadius.circular(rootSize * 5 / 15),
+                          boxShadow: [
+                            BoxShadow(
+                              offset: Offset(0, rootSize * 7 / 15),
+                              blurRadius: rootSize * 10 / 15,
+                              spreadRadius: rootSize * 2 / 15,
+                              color: COLOR_DARK_CYAN.toColor().withOpacity(0.2),
+                            ),
+                          ],
                         ),
-                        margin: EdgeInsets.fromLTRB(
-                            rootSize * 1.5, 130, rootSize * 1.5, 0),
+                        margin: deviceWidth < deviceWidths['md']!
+                            ? EdgeInsets.fromLTRB(
+                                rootSize * 1.5, 130, rootSize * 1.5, 0)
+                            : EdgeInsets.fromLTRB(
+                                rootSize * 1.5, 80, rootSize * 1.5, 0),
                         padding: EdgeInsets.symmetric(
                             horizontal: rootSize, vertical: rootSize * 0.8),
                         child: Row(
@@ -92,7 +105,9 @@ class HomePage extends StatelessWidget {
                                 'Clear',
                                 style: TextStyle(
                                   fontWeight: FontWeight.w700,
-                                  fontSize: rootSize * 13.5 / 15,
+                                  fontSize: deviceWidth < deviceWidths['md']!
+                                      ? rootSize * 13.5 / 15
+                                      : rootSize * 14.5 / 15,
                                 ),
                               ),
                             ),
