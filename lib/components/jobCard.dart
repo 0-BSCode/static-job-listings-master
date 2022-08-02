@@ -29,7 +29,7 @@ class JobCard extends StatelessWidget {
         0,
         0,
         0,
-        deviceWidth < deviceWidths['md']! ? rootSize * 3 : rootSize * 2,
+        deviceWidth < deviceWidths['md']! ? rootSize * 4 : rootSize * 2,
       ),
       child: Container(
         height:
