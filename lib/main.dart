@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Frontend Mentor',
       theme: ThemeData(
         fontFamily: "Spartan",
       ),
